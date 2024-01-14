@@ -4,5 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="GG">#FFFF11FF</color>
     <color name="light_green_for_main_activity_button">##6e8744</color>
-    <color name="light_green_">##6e85744</color>
+    <color name="light_green_for_main_activity">##6e9744</color>
 </resources>
