@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Sport Spot</string>
+    <string name="greetings_text_main_activity">Привет, давай познакомимся!</string>
+    <string name="hint_for_email_registration_main_activity">example@gmail.com</string>
+    <string name="hint_for_password_registration_main_activity">Example1234</string>
 </resources>
