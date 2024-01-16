@@ -16,7 +16,7 @@
         android:hint="@string/hint_for_password_registration_main_activity"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:textColor="@color/white"
+        android:textColor="@color/white_for_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
@@ -30,7 +30,7 @@
         android:hint="@string/hint_for_email_registration_main_activity"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColor="@color/white"
+        android:textColor="@color/white_for_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="@string/greetings_text_main_activity"
-        android:textColor="@color/white"
+        android:textColor="@color/white_for_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
