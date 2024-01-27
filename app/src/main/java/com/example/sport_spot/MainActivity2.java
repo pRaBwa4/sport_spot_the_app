@@ -31,7 +31,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         // Установка начального положения карты
         mapView.getMap().move(
-                new CameraPosition(new Point(59.565369, 150.808092), 14.0f, 0.0f, 0.0f),
+                new CameraPosition(new Point(56.833616, 60.612949), 13.0f, 0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0f),
                 null
         );
