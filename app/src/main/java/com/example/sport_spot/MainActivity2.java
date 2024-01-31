@@ -1,17 +1,20 @@
 package com.example.sport_spot;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.sport_spot.R;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.IconStyle;
+import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.mapview.MapView;
+import com.yandex.mapkit.map.PlacemarkMapObject;
+import com.yandex.runtime.image.ImageProvider;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -36,6 +39,34 @@ public class MainActivity2 extends AppCompatActivity {
                 null
         );
 
+        MapObjectCollection pinsCollection = mapView.getMap().getMapObjects().addCollection();
+
+        // Список координат для меток
+        Point[] points = {
+                new Point(56.829674, 60.634672),
+                new Point(56.826192, 60.621252),
+                new Point(56.833092, 60.631720),
+                new Point(56.832533, 60.626736)
+        };
+
+        // Добавление меток в коллекцию
+        for (Point point : points) {
+            PlacemarkMapObject placemark = pinsCollection.addPlacemark(point);
+
+            // Используем стандартный маркер
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.basket);
+
+            // Указываем новую ширину и высоту для уменьшенного изображения
+            int newWidth = originalBitmap.getWidth() / 2; // Уменьшение вдвое
+            int newHeight = originalBitmap.getHeight() / 2; // Уменьшение вдвое
+
+            // Создаем уменьшенное изображение
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, false);
+
+            ImageProvider imageProvider = ImageProvider.fromBitmap(scaledBitmap);
+            placemark.setIcon(imageProvider); // Установите уменьшенное изображение для метки
+        }
+
         Log.d("MainActivity2", "onCreate");
     }
 
@@ -55,3 +86,4 @@ public class MainActivity2 extends AppCompatActivity {
         Log.d("MainActivity2", "onStop");
     }
 }
+
