@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white_for_text">#FFFFFFFF</color>
     <color name="backgroung_for_main_activity">#FFFF11FF</color>
+    <color name="hint_for_registration_color">#C0C0C0</color>
+    <color name="purple_for_submit_button_n_widgets">#ff6750a4</color>
 </resources>
