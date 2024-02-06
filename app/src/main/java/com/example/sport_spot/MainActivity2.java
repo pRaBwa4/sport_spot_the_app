@@ -1,6 +1,16 @@
 package com.example.sport_spot;
 
-import com.yandex.mapkit.Animation;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.sport_spot.MainActivity3;
+import com.example.sport_spot.R;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
@@ -9,12 +19,7 @@ import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.mapview.MapView;
 import com.yandex.mapkit.map.PlacemarkMapObject;
 import com.yandex.runtime.image.ImageProvider;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Log;
-import androidx.appcompat.app.AppCompatActivity;
+import com.yandex.mapkit.map.MapObjectTapListener;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -34,9 +39,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         // Установка начального положения карты
         mapView.getMap().move(
-                new CameraPosition(new Point(56.834716, 60.612949), 13.0f, 0.0f, 0.0f),
-                new Animation(Animation.Type.SMOOTH, 0f),
-                null
+                new CameraPosition(new Point(56.834716, 60.612949), 13.0f, 0.0f, 0.0f)
         );
 
         MapObjectCollection pinsCollection = mapView.getMap().getMapObjects().addCollection();
@@ -46,7 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
                 new Point(56.829674, 60.634672),
                 new Point(56.826192, 60.621252),
                 new Point(56.833092, 60.631720),
-                new Point(56.832533, 60.626736)
+                new Point(56.832533, 60.626737)
         };
 
         // Добавление меток в коллекцию
@@ -65,6 +68,21 @@ public class MainActivity2 extends AppCompatActivity {
 
             ImageProvider imageProvider = ImageProvider.fromBitmap(scaledBitmap);
             placemark.setIcon(imageProvider); // Установите уменьшенное изображение для метки
+
+            // Добавляем обработчик нажатия на метку
+            placemark.addTapListener(new MapObjectTapListener() {
+                @Override
+                public boolean onMapObjectTap(@NonNull com.yandex.mapkit.map.MapObject mapObject, @NonNull Point point) {
+                    // Проверяем, что нажатый объект - метка
+                    if (mapObject instanceof PlacemarkMapObject) {
+                        // Действия при нажатии на метку
+                        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         Log.d("MainActivity2", "onCreate");
@@ -86,4 +104,3 @@ public class MainActivity2 extends AppCompatActivity {
         Log.d("MainActivity2", "onStop");
     }
 }
-
