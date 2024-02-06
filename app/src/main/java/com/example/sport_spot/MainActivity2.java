@@ -46,8 +46,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         // Список координат для меток
         Point[] points = {
-                new Point(56.829674, 60.634673),
-                new Point(56.826192, 60.621252),
+                new Point(56.829674, 60.634675),
+                new Point(56.826192, 60.621253),
                 new Point(56.833092, 60.631720),
                 new Point(56.832533, 60.626737)
         };
