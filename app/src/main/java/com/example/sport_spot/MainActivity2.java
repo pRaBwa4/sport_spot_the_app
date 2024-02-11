@@ -9,17 +9,15 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sport_spot.MainActivity3;
-import com.example.sport_spot.R;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.map.IconStyle;
 import com.yandex.mapkit.map.MapObjectCollection;
-import com.yandex.mapkit.mapview.MapView;
 import com.yandex.mapkit.map.PlacemarkMapObject;
-import com.yandex.runtime.image.ImageProvider;
 import com.yandex.mapkit.map.MapObjectTapListener;
+import com.yandex.runtime.image.ImageProvider;
+import com.yandex.mapkit.mapview.MapView;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -53,8 +51,9 @@ public class MainActivity2 extends AppCompatActivity {
         };
 
         // Добавление меток в коллекцию
+        PlacemarkMapObject placemark = null;
         for (Point point : points) {
-            PlacemarkMapObject placemark = pinsCollection.addPlacemark(point);
+            placemark = pinsCollection.addPlacemark(point);
 
             // Используем стандартный маркер
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.basket);
@@ -76,7 +75,12 @@ public class MainActivity2 extends AppCompatActivity {
                     // Проверяем, что нажатый объект - метка
                     if (mapObject instanceof PlacemarkMapObject) {
                         // Действия при нажатии на метку
+                        // Получаем информацию о метке, например, ее адрес
+                        String address = getAddressForPoint(point);
+
+                        // Передаем информацию в активити MainActivity3
                         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                        intent.putExtra("ADDRESS", address);
                         startActivity(intent);
                         return true;
                     }
@@ -86,6 +90,31 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
         Log.d("MainActivity2", "onCreate");
+    }
+
+    // Метод для получения адреса по координатам
+    private String getAddressForPoint(Point point) {
+        double latitude = point.getLatitude();
+        double longitude = point.getLongitude();
+
+        double epsilon = 0.001; // Небольшая допустимая погрешность
+
+        if (areCoordinatesEqual(latitude, 56.829674, epsilon) && areCoordinatesEqual(longitude, 60.634675, epsilon)) {
+            return "ул. Куйбышева 76А";
+        } else if (areCoordinatesEqual(latitude, 56.826192, epsilon) && areCoordinatesEqual(longitude, 60.621253, epsilon)) {
+            return "парк им. Павлика Морозова";
+        } else if (areCoordinatesEqual(latitude, 56.833092, epsilon) && areCoordinatesEqual(longitude, 60.631720, epsilon)) {
+            return "ул. Карла-Маркса 43";
+        } else if (areCoordinatesEqual(latitude, 56.832533, epsilon) && areCoordinatesEqual(longitude, 60.626737, epsilon)) {
+            return "ул. Карла-Маркса 33";
+        } else {
+            // Если ошибочка
+            return "Неизвестный адрес";
+        }
+    }
+
+    private boolean areCoordinatesEqual(double coord1, double coord2, double epsilon) {
+        return Math.abs(coord1 - coord2) < epsilon;
     }
 
     @Override
