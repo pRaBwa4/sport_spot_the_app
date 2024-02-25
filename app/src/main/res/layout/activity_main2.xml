@@ -12,7 +12,19 @@
         android:layout_height="match_parent"
         tools:ignore="MissingClass"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="192dp">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="297dp"
+            android:layout_marginBottom="668dp"
+            android:onClick="ToProfile"
+            android:text="Profile" />
+    </com.yandex.mapkit.mapview.MapView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

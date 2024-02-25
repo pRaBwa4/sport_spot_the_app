@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Sport Spot</string>
-    <string name="greetings_text_main_activity">Привет, давай познакомимся!</string>
+    <string name="greetings_text_main_activity">Приятной игры!</string>
     <string name="hint_for_email_registration_main_activity">example@gmail.com</string>
-    <string name="hint_for_password_registration_main_activity">Example1234</string>
-    <string name="button_text_for_activity_main">Подтвердить</string>
+    <string name="hint_for_password_registration_main_activity">Пароль должен содержать не менее 6 символов и хотя бы одну заглавную букву</string>
+    <string name="button_text_for_activity_main">Вход</string>
+    <string name="default_web_client_id">569681577603-18efeqv2qj1afqfc2lpd1dkfsnahph2l.apps.googleusercontent.com</string>
+    <string name="hint_default_nick">Nickname</string>
+    <string name="hint_code">Введите код подтверждения</string>
 </resources>
