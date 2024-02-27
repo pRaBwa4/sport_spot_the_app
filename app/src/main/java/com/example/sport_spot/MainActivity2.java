@@ -20,6 +20,8 @@ import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.map.PlacemarkMapObject;
 import com.yandex.runtime.image.ImageProvider;
 import com.yandex.mapkit.mapview.MapView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.yandex.mapkit.map.MapObjectTapListener;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -42,13 +44,6 @@ public class MainActivity2 extends AppCompatActivity {
                 new CameraPosition(new Point(56.834716, 60.612949), 13.0f, 0.0f, 0.0f)
         );
 
-        initializeMapMarkers(); // Вызываем метод для инициализации маркеров на карте
-
-        Log.d("MainActivity2", "onCreate");
-    }
-
-
-    private void initializeMapMarkers() {
         MapObjectCollection pinsCollection = mapView.getMap().getMapObjects().addCollection();
 
         // Список координат для меток
@@ -60,8 +55,9 @@ public class MainActivity2 extends AppCompatActivity {
         };
 
         // Добавление меток в коллекцию
+        PlacemarkMapObject placemark = null;
         for (Point point : points) {
-            PlacemarkMapObject placemark = pinsCollection.addPlacemark(point);
+            placemark = pinsCollection.addPlacemark(point);
 
             // Используем стандартный маркер
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.basket);
@@ -76,9 +72,53 @@ public class MainActivity2 extends AppCompatActivity {
             ImageProvider imageProvider = ImageProvider.fromBitmap(scaledBitmap);
             placemark.setIcon(imageProvider); // Установите уменьшенное изображение для метки
 
-            // Связываем метку с действием (например, переход на MainActivity3)
-            placemark.setUserData("MainActivity3");
+            // Добавляем обработчик нажатия на метку
+            placemark.addTapListener(new MapObjectTapListener() {
+                @Override
+                public boolean onMapObjectTap(@NonNull com.yandex.mapkit.map.MapObject mapObject, @NonNull Point point) {
+                    // Проверяем, что нажатый объект - метка
+                    if (mapObject instanceof PlacemarkMapObject) {
+                        // Действия при нажатии на метку
+                        // Получаем информацию о метке, например, ее адрес
+                        String address = getAddressForPoint(point);
+
+                        // Передаем информацию в активити MainActivity3
+                        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+                        intent.putExtra("ADDRESS", address);
+                        startActivity(intent);
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
+
+        Log.d("MainActivity2", "onCreate");
+    }
+
+    // Метод для получения адреса по координатам
+    private String getAddressForPoint(Point point) {
+        double latitude = point.getLatitude();
+        double longitude = point.getLongitude();
+
+        double epsilon = 0.001; // Небольшая допустимая погрешность
+
+        if (areCoordinatesEqual(latitude, 56.829674, epsilon) && areCoordinatesEqual(longitude, 60.634675, epsilon)) {
+            return "ул. Куйбышева 76А";
+        } else if (areCoordinatesEqual(latitude, 56.826192, epsilon) && areCoordinatesEqual(longitude, 60.621253, epsilon)) {
+            return "парк им. Павлика Морозова";
+        } else if (areCoordinatesEqual(latitude, 56.833092, epsilon) && areCoordinatesEqual(longitude, 60.631720, epsilon)) {
+            return "ул. Карла-Маркса 43";
+        } else if (areCoordinatesEqual(latitude, 56.832533, epsilon) && areCoordinatesEqual(longitude, 60.626737, epsilon)) {
+            return "ул. Карла-Маркса 33";
+        } else {
+            // Если ошибочка
+            return "Неизвестный адрес";
+        }
+    }
+
+    private boolean areCoordinatesEqual(double coord1, double coord2, double epsilon) {
+        return Math.abs(coord1 - coord2) < epsilon;
     }
 
     @Override
@@ -96,7 +136,6 @@ public class MainActivity2 extends AppCompatActivity {
         MapKitFactory.getInstance().onStop();
         Log.d("MainActivity2", "onStop");
     }
-
     public void ToProfile(View view) {
         FirebaseAuth.getInstance().signOut(); // Выход из аккаунта
         Intent intent = new Intent(MainActivity2.this, Profile.class);
