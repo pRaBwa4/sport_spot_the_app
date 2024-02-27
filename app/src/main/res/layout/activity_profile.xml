@@ -19,12 +19,13 @@
 
     <Button
         android:id="@+id/gotomap"
-        android:layout_width="148dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="28dp"
-        android:text="GoToMap"
+        android:layout_width="160dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="36dp"
         android:onClick="ToMainActivity2"
+        android:text="GoToMap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
