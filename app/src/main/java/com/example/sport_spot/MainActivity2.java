@@ -18,6 +18,8 @@ import com.yandex.mapkit.map.PlacemarkMapObject;
 import com.yandex.mapkit.map.MapObjectTapListener;
 import com.yandex.runtime.image.ImageProvider;
 import com.yandex.mapkit.mapview.MapView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.yandex.mapkit.map.MapObjectTapListener;
 
 public class MainActivity2 extends AppCompatActivity {
 
