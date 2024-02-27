@@ -3,8 +3,10 @@ package com.example.sport_spot;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -133,5 +135,11 @@ public class MainActivity2 extends AppCompatActivity {
         mapView.onStop();
         MapKitFactory.getInstance().onStop();
         Log.d("MainActivity2", "onStop");
+    }
+    public void ToProfile(View view) {
+        FirebaseAuth.getInstance().signOut(); // Выход из аккаунта
+        Intent intent = new Intent(MainActivity2.this, Profile.class);
+        startActivity(intent);
+        finish(); // Закрытие текущей активности
     }
 }
